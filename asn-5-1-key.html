@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="2024 FIRE198 Sustainability Analytics">
+
+<title>ASN5.1. Paper Replication: Understanding the Data</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="asn-5-1-key_files/libs/clipboard/clipboard.min.js"></script>
+<script src="asn-5-1-key_files/libs/quarto-html/quarto.js"></script>
+<script src="asn-5-1-key_files/libs/quarto-html/popper.min.js"></script>
+<script src="asn-5-1-key_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="asn-5-1-key_files/libs/quarto-html/anchor.min.js"></script>
+<link href="asn-5-1-key_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="asn-5-1-key_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="asn-5-1-key_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="asn-5-1-key_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="asn-5-1-key_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">ASN5.1. Paper Replication: Understanding the Data</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>2024 FIRE198 Sustainability Analytics </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="part-1.-understanding-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="part-1.-understanding-the-data">Part 1. Understanding the Data</h2>
+<section id="step-1" class="level3">
+<h3 class="anchored" data-anchor-id="step-1">Step 1</h3>
+<p>Let RStudio know that you plan to use the tidyverse package with the script below. You just need to run it.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.4.4     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+</div>
+</section>
+<section id="step-2" class="level3">
+<h3 class="anchored" data-anchor-id="step-2">Step 2</h3>
+<p>Notice that the folder <strong>EPA AMPD</strong> appeared after you have cloned the repository. Within the folder are 5 files that shows monthly emissions from each electricity generating unit each year.</p>
+<p>The read.csv() function allows you to upload files into the RStudio environment. The script below upload emissions data in the year 2007 from the folder EPA AMPD and store it as <strong>df2007</strong>. You just need to run it.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df2007<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">"EPA AMPD/emission_2007.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="step-3" class="level3">
+<h3 class="anchored" data-anchor-id="step-3">Step 3</h3>
+<p>Use the <strong>names</strong> function to preview the variable names. This can be done by using the script below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(df2007)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "X"                        "State"                   
+ [3] "Facility.Name"            "Facility.ID..ORISPL."    
+ [5] "Unit.ID"                  "Associated.Stacks"       
+ [7] "Month"                    "Year"                    
+ [9] "Program.s."               "Operating.Time"          
+[11] "Gross.Load..MW.h."        "Steam.Load..1000lb."     
+[13] "SO2..tons."               "Avg..NOx.Rate..lb.MMBtu."
+[15] "NOx..tons."               "CO2..short.tons."        
+[17] "Heat.Input..MMBtu."       "EPA.Region"              
+[19] "NERC.Region"              "County"                  </code></pre>
+</div>
+</div>
+<section id="question-1-what-three-variables-indicate-the-total-amount-of-greenhouse-gases-and-pollutants-that-were-being-emitted-3-points" class="level4">
+<h4 class="anchored" data-anchor-id="question-1-what-three-variables-indicate-the-total-amount-of-greenhouse-gases-and-pollutants-that-were-being-emitted-3-points">Question 1: What three variables indicate the total amount of greenhouse gases and pollutants that were being emitted? (3 points)</h4>
+</section>
+<section id="answer-so2..tons.-nox..tons.-co2..short.tons." class="level4">
+<h4 class="anchored" data-anchor-id="answer-so2..tons.-nox..tons.-co2..short.tons.">Answer: SO2..tons. , NOx..tons. , CO2..short.tons.</h4>
+</section>
+<section id="question-2-what-variables-are-used-to-identify-each-electricity-generating-unit-2-points" class="level4">
+<h4 class="anchored" data-anchor-id="question-2-what-variables-are-used-to-identify-each-electricity-generating-unit-2-points">Question 2: What variables are used to identify each electricity-generating unit? (2 points)</h4>
+</section>
+<section id="answer-facility.id..orispl.-unit.id" class="level4">
+<h4 class="anchored" data-anchor-id="answer-facility.id..orispl.-unit.id">Answer: Facility.ID..ORISPL., Unit.ID</h4>
+</section>
+<section id="question-3-what-two-variables-identify-the-time-the-gases-were-emitted-2-points" class="level4">
+<h4 class="anchored" data-anchor-id="question-3-what-two-variables-identify-the-time-the-gases-were-emitted-2-points">Question 3: What two variables identify the time the gases were emitted? (2 points)</h4>
+</section>
+<section id="answer-month-year" class="level4">
+<h4 class="anchored" data-anchor-id="answer-month-year">Answer: Month, Year</h4>
+</section>
+</section>
+<section id="step-4" class="level3">
+<h3 class="anchored" data-anchor-id="step-4">Step 4</h3>
+<p>Use the <strong>table</strong> function to preview the values in each column. The script below shows how many values are there in the column <strong>State.</strong> You just have to run it.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(df2007<span class="sc">$</span>State)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  AL   AR   AZ   CA   CO   CT   DC   DE   FL   GA   IA   ID   IL   IN   KS   KY 
+1308  555  912 2307  726  588   60  420 2379 1560  606   72 3114 1968  576 1200 
+  LA   MA   MD   ME   MI   MN   MO   MS   MT   NC   ND   NE   NH   NJ   NM   NV 
+1152  894  528  156 1692  618 1050 1068   96 1698  144  384  120 1551  408  492 
+  NY   OH   OK   OR   PA   RI   SC   SD   TN   TX   UT   VA   VT   WA   WI   WV 
+3738 2022  828  177 2256  132  972   96 1002 3867  330 1380   12  195 1032  846 
+  WY 
+ 228 </code></pre>
+</div>
+</div>
+<section id="question-4-which-state-has-the-highest-number-of-electricity-generating-units-1-point" class="level4">
+<h4 class="anchored" data-anchor-id="question-4-which-state-has-the-highest-number-of-electricity-generating-units-1-point">Question 4: Which state has the highest number of electricity-generating units? (1 point)</h4>
+</section>
+<section id="answer-tx" class="level4">
+<h4 class="anchored" data-anchor-id="answer-tx">Answer: TX</h4>
+</section>
+</section>
+<section id="step-5" class="level3">
+<h3 class="anchored" data-anchor-id="step-5">Step 5</h3>
+<p>Use the <strong>summary</strong> function to summarize the <strong>df2007</strong> dataframe. The code is shown below. You just have to run it.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df2007)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       X            State           Facility.Name      Facility.ID..ORISPL.
+ Min.   :    1   Length:49515       Length:49515       Min.   :     3      
+ 1st Qu.:12380   Class :character   Class :character   1st Qu.:  2384      
+ Median :24758   Mode  :character   Mode  :character   Median :  6166      
+ Mean   :24758                                         Mean   : 31499      
+ 3rd Qu.:37136                                         3rd Qu.: 55101      
+ Max.   :49515                                         Max.   :880094      
+                                                                           
+   Unit.ID          Associated.Stacks      Month             Year     
+ Length:49515       Length:49515       Min.   : 1.000   Min.   :2007  
+ Class :character   Class :character   1st Qu.: 4.000   1st Qu.:2007  
+ Mode  :character   Mode  :character   Median : 7.000   Median :2007  
+                                       Mean   : 6.522   Mean   :2007  
+                                       3rd Qu.: 9.000   3rd Qu.:2007  
+                                       Max.   :12.000   Max.   :2007  
+                                                                      
+  Program.s.        Operating.Time  Gross.Load..MW.h. Steam.Load..1000lb.
+ Length:49515       Min.   :  0.0   Min.   :      0   Min.   :       0   
+ Class :character   1st Qu.:  8.7   1st Qu.:   1900   1st Qu.:   48918   
+ Mode  :character   Median :169.4   Median :  25403   Median :  122028   
+                    Mean   :305.3   Mean   :  78076   Mean   :  206064   
+                    3rd Qu.:663.8   3rd Qu.:  97616   3rd Qu.:  249622   
+                    Max.   :744.0   Max.   :1033073   Max.   :15005348   
+                                    NA's   :12853     NA's   :45498      
+   SO2..tons.       Avg..NOx.Rate..lb.MMBtu.   NOx..tons.     
+ Min.   :   0.000   Min.   :0.000            Min.   :   0.00  
+ 1st Qu.:   0.012   1st Qu.:0.040            1st Qu.:   0.85  
+ Median :   0.190   Median :0.108            Median :   5.19  
+ Mean   : 248.969   Mean   :0.196            Mean   :  82.71  
+ 3rd Qu.: 182.773   3rd Qu.:0.300            3rd Qu.:  66.10  
+ Max.   :9847.540   Max.   :3.600            Max.   :3839.40  
+ NA's   :13631      NA's   :9031             NA's   :8854     
+ CO2..short.tons.  Heat.Input..MMBtu.   EPA.Region     NERC.Region       
+ Min.   :      0   Min.   :       0   Min.   : 1.000   Length:49515      
+ 1st Qu.:   1668   1st Qu.:   24956   1st Qu.: 3.000   Class :character  
+ Median :  21110   Median :  239149   Median : 5.000   Mode  :character  
+ Mean   :  71492   Mean   :  709371   Mean   : 4.764                     
+ 3rd Qu.:  71145   3rd Qu.:  875079   3rd Qu.: 6.000                     
+ Max.   :1283545   Max.   :12510060   Max.   :10.000                     
+ NA's   :13633     NA's   :9025                                          
+    County         
+ Length:49515      
+ Class :character  
+ Mode  :character  
+                   
+                   
+                   
+                   </code></pre>
+</div>
+</div>
+<section id="question-5-what-is-the-average-gross-load-1-point" class="level4">
+<h4 class="anchored" data-anchor-id="question-5-what-is-the-average-gross-load-1-point">Question 5: What is the average gross load? (1 point)</h4>
+</section>
+<section id="answer-78076-tons-mwh" class="level4">
+<h4 class="anchored" data-anchor-id="answer-78076-tons-mwh">Answer: 78,076 tons MwH</h4>
+</section>
+<section id="question-6-how-many-missing-values-or-nas-are-in-the-column-nox..tons.-1-point" class="level4">
+<h4 class="anchored" data-anchor-id="question-6-how-many-missing-values-or-nas-are-in-the-column-nox..tons.-1-point">Question 6: How many missing values (or NAs) are in the column NOx..tons.? (1 point)</h4>
+</section>
+<section id="answer-8854" class="level4">
+<h4 class="anchored" data-anchor-id="answer-8854">Answer: 8,854</h4>
+</section>
+</section>
+<section id="step-6" class="level3">
+<h3 class="anchored" data-anchor-id="step-6">Step 6</h3>
+<p>Let’s investigate the missing data in <strong>NOx..tons.</strong> The script below uses the <strong>filter</strong> function and creates a new dataframe called <strong>df0</strong> that contains only observations with NA values in <strong>NOx..tons.</strong> You just have to run it.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df0<span class="ot">&lt;-</span>df2007 <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(NOx..tons.))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="question-7-what-is-the-average-gross-load-in-df0-1-point-for-the-correct-code-and-1-point-for-the-correct-answer" class="level4">
+<h4 class="anchored" data-anchor-id="question-7-what-is-the-average-gross-load-in-df0-1-point-for-the-correct-code-and-1-point-for-the-correct-answer">Question 7: What is the average gross load in df0? (1 point for the correct code and 1 point for the correct answer)</h4>
+</section>
+<section id="hint-use-the-summary-function." class="level4">
+<h4 class="anchored" data-anchor-id="hint-use-the-summary-function.">Hint: Use the summary function.</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(df0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       X            State           Facility.Name      Facility.ID..ORISPL.
+ Min.   :    2   Length:8854        Length:8854        Min.   :     3      
+ 1st Qu.:12635   Class :character   Class :character   1st Qu.:  1912      
+ Median :23100   Mode  :character   Mode  :character   Median :  4195      
+ Mean   :23469                                         Mean   : 35083      
+ 3rd Qu.:34184                                         3rd Qu.: 55128      
+ Max.   :49490                                         Max.   :880094      
+                                                                           
+   Unit.ID          Associated.Stacks      Month             Year     
+ Length:8854        Length:8854        Min.   : 1.000   Min.   :2007  
+ Class :character   Class :character   1st Qu.: 3.000   1st Qu.:2007  
+ Mode  :character   Mode  :character   Median : 5.000   Median :2007  
+                                       Mean   : 6.089   Mean   :2007  
+                                       3rd Qu.: 9.000   3rd Qu.:2007  
+                                       Max.   :12.000   Max.   :2007  
+                                                                      
+  Program.s.        Operating.Time     Gross.Load..MW.h. Steam.Load..1000lb.
+ Length:8854        Min.   : 0.00000   Min.   :   0.0    Min.   : 1         
+ Class :character   1st Qu.: 0.00000   1st Qu.:   0.0    1st Qu.:15         
+ Mode  :character   Median : 0.00000   Median :   0.0    Median :29         
+                    Mean   : 0.01807   Mean   : 306.3    Mean   :29         
+                    3rd Qu.: 0.00000   3rd Qu.:   0.0    3rd Qu.:43         
+                    Max.   :55.50000   Max.   :3674.0    Max.   :57         
+                                       NA's   :8834      NA's   :8852       
+   SO2..tons.    Avg..NOx.Rate..lb.MMBtu.   NOx..tons.   CO2..short.tons.  
+ Min.   :0.000   Min.   :0.000            Min.   : NA    Min.   :   0.000  
+ 1st Qu.:0.000   1st Qu.:0.000            1st Qu.: NA    1st Qu.:   0.007  
+ Median :0.000   Median :0.000            Median : NA    Median :   0.200  
+ Mean   :0.176   Mean   :0.180            Mean   :NaN    Mean   : 318.832  
+ 3rd Qu.:0.000   3rd Qu.:0.013            3rd Qu.: NA    3rd Qu.:   7.022  
+ Max.   :2.164   Max.   :2.379            Max.   : NA    Max.   :2805.603  
+ NA's   :8837    NA's   :8834             NA's   :8854   NA's   :8839      
+ Heat.Input..MMBtu.   EPA.Region     NERC.Region           County         
+ Min.   :    0.00   Min.   : 1.000   Length:8854        Length:8854       
+ 1st Qu.:    0.00   1st Qu.: 4.000   Class :character   Class :character  
+ Median :    0.82   Median : 5.000   Mode  :character   Mode  :character  
+ Mean   : 3309.04   Mean   : 4.731                                        
+ 3rd Qu.:   37.46   3rd Qu.: 6.000                                        
+ Max.   :46584.93   Max.   :10.000                                        
+ NA's   :8830                                                             </code></pre>
+</div>
+</div>
+</section>
+<section id="answer-306-mwh" class="level4">
+<h4 class="anchored" data-anchor-id="answer-306-mwh">Answer: 306 MwH</h4>
+</section>
+</section>
+<section id="step-8" class="level3">
+<h3 class="anchored" data-anchor-id="step-8">Step 8</h3>
+<p>Because the average gross load for observations with NA values in <strong>NOx..tons.</strong> are much lower than the average, we will replace NA values in the column <strong>NOx..tons.</strong> with 0. To do that, you must combine the <strong>mutate</strong> and <strong>ifelse</strong> functions.</p>
+<p>The script below allows you to create a new column named <strong>NOx_emit</strong> in <strong>df2</strong>.</p>
+<p>If <strong>NOx..tons.</strong> equals NA, then <strong>NOx_emit</strong> will be zero.</p>
+<p>Otherwise, <strong>NOx_emit</strong> is equal to <strong>NOx..tons.</strong></p>
+<p>The code is shown below. You just have to run it.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>df2<span class="ot">&lt;-</span>df2007 <span class="sc">%&gt;%</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">NOx_emit=</span><span class="fu">ifelse</span>(<span class="fu">is.na</span>(NOx..tons.),<span class="dv">0</span>,NOx..tons.))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="part-2-preparing-data-for-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-preparing-data-for-analysis">Part 2: Preparing Data for Analysis</h2>
+<p>You will use the <strong>filter</strong> and <strong>mutate</strong> functions to identify which facilities were regulated by the NOx Budget Program. Combined with the codes you will write in next week’s assignment, you will be able to create the figure below, which compares NOx emissions before and after the implementation of the NOx Budget Program.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Figure%201%20Rep.png" class="img-fluid figure-img" width="500"></p>
+</figure>
+</div>
+<section id="step-1-upload-data-2-points" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-upload-data-2-points">Step 1: Upload data (2 points)</h3>
+<p>In Part 1, Step 2, you have uploaded emissions data from 2007. You need to do the same thing for 2001, 2002, 2005, and 2006.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df2001<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">"EPA AMPD/emission_2001.csv"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>df2002<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">"EPA AMPD/emission_2002.csv"</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>df2005<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">"EPA AMPD/emission_2005.csv"</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>df2006<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">"EPA AMPD/emission_2006.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="step-2-combine-data" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-combine-data">Step 2: Combine data</h3>
+<p>Use the <strong>rbind</strong> function to stack all emissions data in 2001, 2002, 2005, 2006, and 2007 together into one data frame, <strong>df</strong>. The code is shown below. You just have to run it.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df<span class="ot">&lt;-</span><span class="fu">rbind</span>(df2001, df2002, df2005, df2006, df2007)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="step-3-replace-missing-values-with-0-1-point" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-replace-missing-values-with-0-1-point">Step 3: Replace missing values with 0 (1 point)</h3>
+<p>Repeat what you did in Part 1, Step 8 to create a new dataframe named <strong>df2</strong> with a new column named <strong>NOx_emit</strong>.</p>
+<p><strong>NOx_emit</strong> will to 0 if <strong>NOx..tons.</strong> is equal to NA. Otherwise, <strong>NOx_emit</strong> will equal to <strong>NOx..tons.</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df2<span class="ot">&lt;-</span>df <span class="sc">%&gt;%</span> </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">NOx_emit=</span><span class="fu">ifelse</span>(<span class="fu">is.na</span>(NOx..tons.),<span class="dv">0</span>,NOx..tons.))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="question-8-what-are-the-six-possible-values-for-the-program.s.-variable-1-point-for-the-correct-code-and-1-point-for-the-correct-answer" class="level4">
+<h4 class="anchored" data-anchor-id="question-8-what-are-the-six-possible-values-for-the-program.s.-variable-1-point-for-the-correct-code-and-1-point-for-the-correct-answer">Question 8: What are the six possible values for the Program.s. variable? (1 point for the correct code and 1 point for the correct answer)</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(df2<span class="sc">$</span>Program.s.)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+       ARP   ARP, NBP ARP, NHNOX   ARP, OTC        NBP        OTC 
+    122193      57849        360       8841      23379      11208 </code></pre>
+</div>
+</div>
+</section>
+<section id="answer" class="level4">
+<h4 class="anchored" data-anchor-id="answer">Answer:</h4>
+<p>ARP</p>
+<p>ARP, NBP</p>
+<p>ARP, NHNOX</p>
+<p>ARP, OTC</p>
+<p>NBP</p>
+<p>OTC</p>
+</section>
+</section>
+<section id="step-4-keep-only-units-regulated-by-the-acid-rain-program-arp." class="level3">
+<h3 class="anchored" data-anchor-id="step-4-keep-only-units-regulated-by-the-acid-rain-program-arp.">Step 4: Keep only units regulated by the Acid Rain Program (ARP).</h3>
+<p>We will limit our observations to facilities regulated by the Acid Rain Program before the NOx Budget Program. We will use the <strong>filter</strong> function to keep observations that the variable <strong>Program.s.</strong> equals <strong>ARP</strong> or <strong>ARP, NBP</strong>. The code is shown below. You just need to run it.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>df3<span class="ot">&lt;-</span>df2 <span class="sc">%&gt;%</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Program.s.<span class="sc">==</span><span class="st">"ARP"</span> <span class="sc">|</span> Program.s.<span class="sc">==</span><span class="st">"ARP, NBP"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="step-5-create-a-new-column-named-nbp-that-is-equal-to-one-when-each-unit-is-regulated-by-the-nox-budget-program-3-points." class="level3">
+<h3 class="anchored" data-anchor-id="step-5-create-a-new-column-named-nbp-that-is-equal-to-one-when-each-unit-is-regulated-by-the-nox-budget-program-3-points.">Step 5: Create a new column named <strong>NBP</strong> that is equal to one when each unit is regulated by the NOx Budget Program (3 points).</h3>
+<p>You will need to combine the <strong>mutate</strong> and <strong>ifelse</strong> functions to create a dataframe named <strong>df4</strong> with a new column called <strong>NBP</strong>.</p>
+<p><strong>NBP</strong> will equal to 1 if the column <strong>Program.s.</strong> is equal to <strong>ARP, NBP</strong>. Otherwise, <strong>NBP</strong> will equal to 0.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>df4<span class="ot">&lt;-</span>df3 <span class="sc">%&gt;%</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">NBP=</span><span class="fu">ifelse</span>(Program.s.<span class="sc">==</span><span class="st">"ARP, NBP"</span>,<span class="dv">1</span>,<span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="question-9-how-many-observations-in-df4-were-regulated-by-nbp-and-how-many-were-not-regulated-by-nbp-1-point-for-the-correct-code-and-1-point-for-the-correct-answer" class="level4">
+<h4 class="anchored" data-anchor-id="question-9-how-many-observations-in-df4-were-regulated-by-nbp-and-how-many-were-not-regulated-by-nbp-1-point-for-the-correct-code-and-1-point-for-the-correct-answer">Question 9: How many observations in <strong>df4</strong> were regulated by NBP, and how many were not-regulated by NBP? (1 point for the correct code and 1 point for the correct answer)</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(df4<span class="sc">$</span>NBP)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+     0      1 
+122193  57849 </code></pre>
+</div>
+</div>
+</section>
+<section id="answer-122193-unregulated-units-and-57849-regulated-units" class="level4">
+<h4 class="anchored" data-anchor-id="answer-122193-unregulated-units-and-57849-regulated-units">Answer: 122193 unregulated units, and 57849 regulated units</h4>
+</section>
+</section>
+<section id="step-6-click-render-to-generate-an-html-file-of-this-document.-2-points" class="level3">
+<h3 class="anchored" data-anchor-id="step-6-click-render-to-generate-an-html-file-of-this-document.-2-points">Step 6: Click Render to generate an html file of this document. (2 points)</h3>
+<p>You have reached the end of the assignment. Save the Quarto document and push the completed assignment back into the GitHub repository.</p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

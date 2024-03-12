@@ -1,0 +1,199 @@
+---
+title: "ASN5.1. Paper Replication: Understanding the Data"
+author: "2024 FIRE198 Sustainability Analytics"
+format: html
+editor: visual
+---
+
+## Part 1. Understanding the Data
+
+### Step 1
+
+Let RStudio know that you plan to use the tidyverse package with the script below. You just need to run it.
+
+```{r}
+library("tidyverse")
+```
+
+### Step 2
+
+Notice that the folder **EPA AMPD** appeared after you have cloned the repository. Within the folder are 5 files that shows monthly emissions from each electricity generating unit each year.
+
+The read.csv() function allows you to upload files into the RStudio environment. The script below upload emissions data in the year 2007 from the folder EPA AMPD and store it as **df2007**. You just need to run it.
+
+```{r}
+df2007<-read.csv("EPA AMPD/emission_2007.csv")
+```
+
+### Step 3
+
+Use the **names** function to preview the variable names. This can be done by using the script below.
+
+```{r}
+names(df2007)
+```
+
+#### Question 1: What three variables indicate the total amount of greenhouse gases and pollutants that were being emitted? (3 points)
+
+#### Answer: SO2..tons. , NOx..tons. , CO2..short.tons.
+
+#### Question 2: What variables are used to identify each electricity-generating unit? (2 points)
+
+#### Answer: Facility.ID..ORISPL., Unit.ID
+
+#### Question 3: What two variables identify the time the gases were emitted? (2 points)
+
+#### Answer: Month, Year
+
+### Step 4
+
+Use the **table** function to preview the values in each column. The script below shows how many values are there in the column **State.** You just have to run it.
+
+```{r}
+table(df2007$State)
+```
+
+#### Question 4: Which state has the highest number of electricity-generating units? (1 point)
+
+#### Answer: TX
+
+### Step 5
+
+Use the **summary** function to summarize the **df2007** dataframe. The code is shown below. You just have to run it.
+
+```{r}
+summary(df2007)
+```
+
+#### Question 5: What is the average gross load? (1 point)
+
+#### Answer: 78,076 tons MwH
+
+#### Question 6: How many missing values (or NAs) are in the column NOx..tons.? (1 point)
+
+#### Answer: 8,854
+
+### Step 6
+
+Let's investigate the missing data in **NOx..tons.** The script below uses the **filter** function and creates a new dataframe called **df0** that contains only observations with NA values in **NOx..tons.** You just have to run it.
+
+```{r}
+df0<-df2007 %>%
+  filter(is.na(NOx..tons.))
+```
+
+#### Question 7: What is the average gross load in df0? (1 point for the correct code and 1 point for the correct answer)
+
+#### Hint: Use the summary function.
+
+```{r}
+summary(df0)
+```
+
+#### Answer: 306 MwH
+
+### Step 8
+
+Because the average gross load for observations with NA values in **NOx..tons.** are much lower than the average, we will replace NA values in the column **NOx..tons.** with 0. To do that, you must combine the **mutate** and **ifelse** functions.
+
+The script below allows you to create a new column named **NOx_emit** in **df2**.
+
+If **NOx..tons.** equals NA, then **NOx_emit** will be zero.
+
+Otherwise, **NOx_emit** is equal to **NOx..tons.**
+
+The code is shown below. You just have to run it.
+
+```{r}
+df2<-df2007 %>% 
+  mutate(NOx_emit=ifelse(is.na(NOx..tons.),0,NOx..tons.))
+```
+
+## Part 2: Preparing Data for Analysis
+
+You will use the **filter** and **mutate** functions to identify which facilities were regulated by the NOx Budget Program. Combined with the codes you will write in next week's assignment, you will be able to create the figure below, which compares NOx emissions before and after the implementation of the NOx Budget Program.
+
+![](Figure%201%20Rep.png){fig-align="center" width="500"}
+
+### Step 1: Upload data (2 points)
+
+In Part 1, Step 2, you have uploaded emissions data from 2007. You need to do the same thing for 2001, 2002, 2005, and 2006.
+
+```{r}
+df2001<-read.csv("EPA AMPD/emission_2001.csv")
+df2002<-read.csv("EPA AMPD/emission_2002.csv")
+df2005<-read.csv("EPA AMPD/emission_2005.csv")
+df2006<-read.csv("EPA AMPD/emission_2006.csv")
+```
+
+### Step 2: Combine data
+
+Use the **rbind** function to stack all emissions data in 2001, 2002, 2005, 2006, and 2007 together into one data frame, **df**. The code is shown below. You just have to run it.
+
+```{r}
+df<-rbind(df2001, df2002, df2005, df2006, df2007)
+```
+
+### Step 3: Replace missing values with 0 (1 point)
+
+Repeat what you did in Part 1, Step 8 to create a new dataframe named **df2** with a new column named **NOx_emit**.
+
+**NOx_emit** will to 0 if **NOx..tons.** is equal to NA. Otherwise, **NOx_emit** will equal to **NOx..tons.**
+
+```{r}
+df2<-df %>% 
+  mutate(NOx_emit=ifelse(is.na(NOx..tons.),0,NOx..tons.))
+```
+
+#### Question 8: What are the six possible values for the Program.s. variable? (1 point for the correct code and 1 point for the correct answer)
+
+```{r}
+table(df2$Program.s.)
+```
+
+#### Answer:
+
+ARP
+
+ARP, NBP
+
+ARP, NHNOX
+
+ARP, OTC
+
+NBP
+
+OTC
+
+### Step 4: Keep only units regulated by the Acid Rain Program (ARP).
+
+We will limit our observations to facilities regulated by the Acid Rain Program before the NOx Budget Program. We will use the **filter** function to keep observations that the variable **Program.s.** equals **ARP** or **ARP, NBP**. The code is shown below. You just need to run it.
+
+```{r}
+df3<-df2 %>%
+  filter(Program.s.=="ARP" | Program.s.=="ARP, NBP")
+```
+
+### Step 5: Create a new column named **NBP** that is equal to one when each unit is regulated by the NOx Budget Program (3 points).
+
+You will need to combine the **mutate** and **ifelse** functions to create a dataframe named **df4** with a new column called **NBP**.
+
+**NBP** will equal to 1 if the column **Program.s.** is equal to **ARP, NBP**. Otherwise, **NBP** will equal to 0.
+
+```{r}
+df4<-df3 %>%
+  mutate(NBP=ifelse(Program.s.=="ARP, NBP",1,0))
+
+```
+
+#### Question 9: How many observations in **df4** were regulated by NBP, and how many were not-regulated by NBP? (1 point for the correct code and 1 point for the correct answer)
+
+```{r}
+table(df4$NBP)
+```
+
+#### Answer: 122193 unregulated units, and 57849 regulated units
+
+### Step 6: Click Render to generate an html file of this document. (2 points)
+
+You have reached the end of the assignment. Save the Quarto document and push the completed assignment back into the GitHub repository.
